@@ -1,0 +1,46 @@
+TestCases:
+
+
+getItem()=
+    - null -> RuntimeException()
+    - [2 -item-, *...] -> 2
+
+getNext()=
+    - [2 -item-, 3] -> 3
+    - null -> RuntimeException()
+    - [2 -item-] // [2-item-, null] -> null
+
+getPrevious()=
+    - [1, 2 -item-] -> 1
+    - null -> RuntimeException()
+    - [1-item-] // [null, 1-item-] -> null
+
+dequeueNode<T>(T item, T next, T previous)=
+    - []<Integer> (4, 5, 3) -> [3, 4, 5]
+    - []<Integer> (4, null, 3) -> [3, 4]
+    - []<Integer> (4, 5, null) -> [4, 5]
+    - []<Integer> (4, null, null) -> [4]
+    - []<Integer> (null, 5, 3) -> RuntimeException()
+    - []<Integer> (null, null, 3) -> RuntimeException()
+    - []<Integer> (null, 5, null) -> RuntimeException()
+    - []<Integer> (null, null, null) -> RuntimeException()
+
+isFirstNode()=
+    - null -> RuntimeException()
+    - [null, 1 -item-] // [1 -item-] // [1-item, null] -> TRUE
+    - [1 -item-, *...] -> TRUE
+    - [*..., 1-item-] -> FALSE
+    - null -> RuntimeException()
+
+isLastNode()=
+    - null -> RuntimeException()
+    - [1-item-, null] // [1 -item-] -> TRUE
+    - [*..., 1 -item-] -> TRUE
+    - [1-item-, *...] -> FALSE
+
+isNotATerminalNode()=
+    - null -> RuntimeException()
+    - [1, 2 -item-, 3] -> TRUE
+    - [null, 1 -item-] // [1 -item-] // [1-item, null]-> FALSE
+    - [1 -item-, *...] -> FALSE
+    - [*..., 1 -item-] -> FALSE
