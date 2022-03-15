@@ -7,22 +7,30 @@
  */
 public class DequeNode<T> {
     private T item ;
-    private T next ;
-    private T previous ;
+    private DequeNode<T> next ;
+    private DequeNode<T> previous ;
 
     public T getItem() {
         return item;
     }
 
-    public T getNext() {
+    public DequeNode<T> getNext() {
         return next;
     }
 
-    public T getPrevious() {
+    public void setNext(DequeNode<T> next){
+        this.next = next;
+    }
+
+    public void setPrevious(DequeNode<T> previous){
+        this.previous = previous;
+    }
+
+    public DequeNode<T> getPrevious() {
         return previous;
     }
 
-    public DequeNode(T item, T next, T previous) {
+    public DequeNode(T item, DequeNode<T> next, DequeNode<T> previous) {
         if (item == null) throw new RuntimeException("Null item");
         this.item = item ;
         this.next = next ;

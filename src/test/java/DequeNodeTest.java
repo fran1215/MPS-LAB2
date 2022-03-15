@@ -12,15 +12,23 @@ public class DequeNodeTest {
 
     @Test
     public void shouldGetItemFrom_2_3_1_Return_2() {
-        node = new DequeNode(2,3,1);
+        DequeNode<Integer> next = new DequeNode(3, null,null);
+        DequeNode<Integer> prev = new DequeNode(1, null,null);
+        node = new DequeNode(2, next, prev);
+        prev.setNext(node);
+        next.setPrevious(node);
         assertEquals(node.getItem(), 2);
     }
 
 
     @Test
     public void shouldGetPreviousFrom_2_3_1_Return_1() {
-        node = new DequeNode(2,3,1);
-        assertEquals(node.getPrevious(), 1);
+        DequeNode<Integer> next = new DequeNode(3, null,null);
+        DequeNode<Integer> prev = new DequeNode(1, null,null);
+        node = new DequeNode(2, next, prev);
+        prev.setNext(node);
+        next.setPrevious(node);
+        assertEquals(node.getPrevious().getItem(), 1);
     }
 
     @Test
@@ -31,32 +39,42 @@ public class DequeNodeTest {
 
     @Test
     public void shouldGetPreviousFrom_1_null_3_ReturnNull() {
-        node = new DequeNode(1,2,null);
+        DequeNode<Integer> next = new DequeNode(2, null,null);
+        node = new DequeNode(1, next,null);
+        next.setPrevious(node);
         assertEquals(node.getPrevious(), null);
     }
 
     @Test
     public void shouldConstructor_4_5_3_CreateDEQueue_3_4_5(){
-        node = new DequeNode(4, 5, 3);
+        DequeNode<Integer> next = new DequeNode(5, null,null);
+        DequeNode<Integer> prev = new DequeNode(3, null,null);
+        node = new DequeNode(4, next, prev);
+        prev.setNext(node);
+        next.setPrevious(node);
         assertEquals(node.getItem(), 4);
-        assertEquals(node.getPrevious(), 3);
-        assertEquals(node.getNext(), 5);
+        assertEquals(node.getPrevious().getItem(), 3);
+        assertEquals(node.getNext().getItem(), 5);
     }
 
     @Test
     public void shouldConstructor_4_null_3_CreateDEQueue_3_4(){
-        node = new DequeNode(4, null, 3);
+        DequeNode<Integer> prev = new DequeNode(3, null,null);
+        node = new DequeNode(4, null, prev);
+        prev.setNext(node);
         assertEquals(node.getItem(), 4);
-        assertEquals(node.getPrevious(), 3);
+        assertEquals(node.getPrevious().getItem(), 3);
         assertEquals(node.getNext(), null);
     }
 
     @Test
     public void shouldConstructor_4_5_null_CreateDEQueue_4_5(){
-        node = new DequeNode(4, 5, null);
+        DequeNode<Integer> next = new DequeNode(5, null,null);
+        node = new DequeNode(4, next, null);
+        next.setPrevious(node);
         assertEquals(node.getItem(), 4);
         assertEquals(node.getPrevious(), null);
-        assertEquals(node.getNext(), 5);
+        assertEquals(node.getNext().getItem(), 5);
     }
 
     @Test
@@ -69,17 +87,21 @@ public class DequeNodeTest {
 
     @Test
     public void shouldConstructor_null_5_3_ThrowException(){
-        assertThrows(RuntimeException.class, () -> new DequeNode(null, 5, 3));
+        DequeNode<Integer> next = new DequeNode(5, null,null);
+        DequeNode<Integer> prev = new DequeNode(3, null,null);
+        assertThrows(RuntimeException.class, () -> node = new DequeNode(null, prev, next));
     }
 
     @Test
     public void shouldConstructor_null_null_3_ThrowException(){
-        assertThrows(RuntimeException.class, () -> new DequeNode(null, null, 3));
+        DequeNode<Integer> prev = new DequeNode(3, null,null);
+        assertThrows(RuntimeException.class, () -> new DequeNode(null, null, prev));
     }
 
     @Test
     public void shouldConstructor_null_5_null_ThrowException(){
-        assertThrows(RuntimeException.class, () -> new DequeNode(null, 5, null));
+        DequeNode<Integer> next = new DequeNode(5, null,null);
+        assertThrows(RuntimeException.class, () -> new DequeNode(null, next, null));
     }
 
     @Test
@@ -87,11 +109,14 @@ public class DequeNodeTest {
         assertThrows(RuntimeException.class, () -> new DequeNode(null, null, null));
     }
 
-
     @Test
     public void shouldGetNextFrom_2_3_1_Return_3() {
-        node = new DequeNode(2,3,1);
-        assertEquals(node.getNext(), 3);
+        DequeNode<Integer> next = new DequeNode(3, null,null);
+        DequeNode<Integer> prev = new DequeNode(1, null,null);
+        node = new DequeNode(2, next, prev);
+        prev.setNext(node);
+        next.setPrevious(node);
+        assertEquals(node.getNext().getItem(), 3);
     }
 
     @Test
@@ -102,7 +127,9 @@ public class DequeNodeTest {
 
     @Test
     public void shouldGetNextFrom_1_null_3_ReturnNull() {
-        node = new DequeNode(1,null,3);
+        DequeNode<Integer> prev = new DequeNode(3, null,null);
+        node = new DequeNode(1,null, prev);
+        prev.setNext(node);
         assertEquals(node.getNext(), null);
     }
 
@@ -115,13 +142,19 @@ public class DequeNodeTest {
 
     @Test
     public void shouldisFirstNodeFrom_1_3_null_Return_TRUE() {
-        node = new DequeNode(1,3,null);
+        DequeNode<Integer> next = new DequeNode(3, null,null);
+        node = new DequeNode(1, next,null);
+        next.setPrevious(node);
         assertEquals(node.isFirstNode(), true);
     }
 
     @Test
     public void shouldisFirstNodeFrom_1_3_2_Return_TRUE() {
-        node = new DequeNode(1,3,2);
+        DequeNode<Integer> next = new DequeNode(3, null,null);
+        DequeNode<Integer> prev = new DequeNode(1, null,null);
+        node = new DequeNode(2, next, prev);
+        prev.setNext(node);
+        next.setPrevious(node);
         assertEquals(node.isFirstNode(), false);
     }
 
@@ -138,14 +171,21 @@ public class DequeNodeTest {
     }
 
     @Test
-    public void shouldisLastNodeFrom_1_null_3_Return_TRUE() {
-        node = new DequeNode(1,null,3);
+    public void shouldisLastNodeFrom_4_null_3_Return_TRUE() {
+        DequeNode<Integer> prev = new DequeNode(3, null,null);
+        node = new DequeNode(4,null,prev);
+        prev.setNext(node);
+
         assertEquals(node.isLastNode(), true);
     }
 
     @Test
     public void shouldisLastNodeFrom_1_3_2_Return_FALSE() {
-        node = new DequeNode(1,3,2);
+        DequeNode<Integer> next = new DequeNode(2, null,null);
+        DequeNode<Integer> prev = new DequeNode(3, null,null);
+        node = new DequeNode(1, next, prev);
+        next.setPrevious(node);
+        prev.setNext(node);
         assertEquals(node.isLastNode(), false);
     }
 
@@ -158,7 +198,11 @@ public class DequeNodeTest {
     //isNotATerminalNode
     @Test
     public void shouldisNotATerminalNodeFrom_2_3_1_Return_TRUE() {
-        node = new DequeNode(2,3,1);
+        DequeNode<Integer> next = new DequeNode(3, null,null);
+        DequeNode<Integer> prev = new DequeNode(1, null,null);
+        node = new DequeNode(2, next, prev);
+        prev.setNext(node);
+        next.setPrevious(node);
         assertEquals(node.isNotATerminalNode(), true);
     }
 
@@ -170,13 +214,17 @@ public class DequeNodeTest {
 
     @Test
     public void shouldisNotATerminalNodeFrom_1_2_null_Return_FALSE() {
-        node = new DequeNode(1,2,null);
+        DequeNode<Integer> next = new DequeNode(2, null,null);
+        node = new DequeNode(1, next, null);
+        next.setPrevious(node);
         assertEquals(node.isNotATerminalNode(), false);
     }
 
     @Test
-    public void shouldisNotATerminalNodeFrom_1_null_2_Return_FALSE() {
-        node = new DequeNode(1,null,2);
+    public void shouldisNotATerminalNodeFrom_1_null_0_Return_FALSE() {
+        DequeNode<Integer> prev = new DequeNode(0, null,null);
+        node = new DequeNode(1, null, prev);
+        prev.setNext(node);
         assertEquals(node.isNotATerminalNode(), false);
     }
 

@@ -1,7 +1,7 @@
 public interface DoubleEndedQueue<T> {
     // Basic operations
-    void append(DequeNode<T> node) ;
-    void appendLeft(DequeNode<T> node) ;
+    void append(T data) ;
+    void appendLeft(T data) ;
     void deleteFirst() ;
     void deleteLast() ;
     DequeNode<T> peekFirst() ;
