@@ -23,6 +23,7 @@ public class DequeNode<T> {
     }
 
     public DequeNode(T item, T next, T previous) {
+        if (item == null) throw new RuntimeException("Null item");
         this.item = item ;
         this.next = next ;
         this.previous = previous ;
