@@ -1,6 +1,5 @@
 TestCases:
 
-
 getItem()=
     - null -> RuntimeException()
     - [2 -item-, *...] -> 2
@@ -44,3 +43,49 @@ isNotATerminalNode()=
     - [null, 1 -item-] // [1 -item-] // [1-item, null]-> FALSE
     - [1 -item-, *...] -> FALSE
     - [*..., 1 -item-] -> FALSE
+
+
+
+Test Cases DoubleLinkedListQueue:
+
+DoubleLinkedListQueue<T>=
+    - []<Integer> (4) -> [4]
+    - []<Integer> (null) -> RunTimeException()
+
+
+append(T data)=
+     - [1 , 2] && data == null -> RunTimeException()
+     // - [] && data == null -> RunTimeException()
+     - null && data == null -> RunTimeException()
+     - [1 , 2] && data == 3 -> [1 , 2 , 3]
+     - [] && data == 3 -> [3]
+appendLeft(T data)=
+    - [1 , 2] && data == null -> RuntimeException()
+    //- [] && data == null -> RuntimeException()
+    - null && data == null -> RunTimeException()
+    - [1 , 2] && data == 3 -> [3 , 1 , 2]
+    - [] && data == 3 -> [3]
+deleteFirst()=
+    //- null -> RunTimeException()
+    - [1 , 2 , 3] -> [2 , 3]
+    - [1] -> []
+    - [] -> RunTimeException()
+
+deleteLast()=
+    //- null -> RunTimeException()
+    - [1 , 2 , 3] -> [1 , 2]
+    - [1] -> []
+    - [] -> RunTimeException()
+
+DequeNode<T> peekFirst()=
+  //  - null -> RunTimeException()
+    - [1 , 2 , 3] -> 1
+    - [] -> null
+DequeNode<T> peekLast()=
+  //  - null -> RunTimeException()
+    - [1 , 2 , 3] -> 3
+    - [] -> null
+int size()=
+    //- null -> RunTimeException()
+    - [1 , 2 , 3] -> 3
+    - [] -> 0

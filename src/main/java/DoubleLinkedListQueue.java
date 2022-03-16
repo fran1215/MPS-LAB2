@@ -1,9 +1,10 @@
 public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
-    private DequeNode<T> root;
-    private DequeNode<T> last;
-    private int size;
+    DequeNode<T> root;
+    DequeNode<T> last;
+    int size;
 
     public DoubleLinkedListQueue(T root){
+        if(root == null) throw new RuntimeException("Root is Null");
         DequeNode<T> nodo = new DequeNode(root, null, null);
         this.root = nodo;
         this.last = nodo;
@@ -67,10 +68,12 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
     }
 
     public DequeNode peekFirst() {
+        if (root == null) throw new RuntimeException("Root is null");
         return root;
     }
 
     public DequeNode peekLast() {
+        if (root == null) throw new RuntimeException("Root is null");
         return last;
     }
 
