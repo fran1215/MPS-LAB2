@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
     DequeNode<T> root;
     DequeNode<T> last;
@@ -80,6 +82,28 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
     public DequeNode peekLast() {
         if (root == null) throw new RuntimeException("Root is null");
         return last;
+    }
+
+    DequeNode<T> getAt(int position){
+        if(size == 0 || position + 1 > size) throw new RuntimeException("Invalid position");
+
+        DequeNode<T> temp = root;
+        for(int i = 0; i<position; i++){
+            temp = temp.getNext();
+        }
+
+        return temp;
+    }
+
+    DequeNode<T> find (T item){
+        return null;
+    }
+
+    void delete(DequeNode<T> node){
+
+    }
+    void sort(Comparator<?> comparator){
+
     }
 
     public int size() {
