@@ -55,37 +55,48 @@ DoubleLinkedListQueue<T>=
 
 append(T data)=
      - [1 , 2] && data == null -> RunTimeException()
-     // - [] && data == null -> RunTimeException()
      - null && data == null -> RunTimeException()
      - [1 , 2] && data == 3 -> [1 , 2 , 3]
      - [] && data == 3 -> [3]
 appendLeft(T data)=
     - [1 , 2] && data == null -> RuntimeException()
-    //- [] && data == null -> RuntimeException()
     - null && data == null -> RunTimeException()
     - [1 , 2] && data == 3 -> [3 , 1 , 2]
     - [] && data == 3 -> [3]
 deleteFirst()=
-    //- null -> RunTimeException()
     - [1 , 2 , 3] -> [2 , 3]
     - [1] -> []
     - [] -> RunTimeException()
 
 deleteLast()=
-    //- null -> RunTimeException()
     - [1 , 2 , 3] -> [1 , 2]
     - [1] -> []
     - [] -> RunTimeException()
 
 DequeNode<T> peekFirst()=
-  //  - null -> RunTimeException()
     - [1 , 2 , 3] -> 1
     - [] -> null
 DequeNode<T> peekLast()=
-  //  - null -> RunTimeException()
     - [1 , 2 , 3] -> 3
     - [] -> null
 int size()=
-    //- null -> RunTimeException()
     - [1 , 2 , 3] -> 3
     - [] -> 0
+
+
+Test Cases complex operations:
+ DequeNode<T> getAt(int position)=
+    - [] -> RuntimeException()
+    - [1,2,3].size < position -> RuntimeException()
+    - [1,2,3] && position == 2 -> 3
+  DequeNode<T> find (T item)=
+    - [] -> RuntimeException()
+    - item == null -> RuntimeException()
+    - [1,2,3] && item.getItem() == 2 -> 2
+    - [1,2,3] && item.getItem() == 4 -> RuntimeException()
+  delete(DequeNode<T> node)
+    - find(node) == null -> RuntimeException() //...
+    - [1] && node == 1 -> []
+    - [1,2,3] && node == 2 -> [1,3]
+    - [1,2,3] && node == 3 -> [1,2]
+  void sort(Comparator<?> comparator) ;
