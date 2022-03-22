@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.*;
+
+import java.util.Comparator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DoubleLinkedListQueueTest {
@@ -292,5 +295,42 @@ public class DoubleLinkedListQueueTest {
         lista.delete(node);
         assertEquals(lista.size(),2);
         assertEquals(lista.getLast().getItem(),2);
+    }
+
+    //sort(Comparator<?> comparator)
+    @Test
+    public void sortNaturalFrom_1_7_4Return1_4_7() {
+        lista = new DoubleLinkedListQueue(1);
+        lista.append(7);
+        lista.append(4);
+        lista.sort(Comparator.naturalOrder());
+        assertEquals(lista.getAt(1).getItem(),4);
+        assertEquals(lista.getLast().getItem(),7);
+    }
+    @Test
+    public void sortNullFrom_1_7_4Return1_4_7() {
+        lista = new DoubleLinkedListQueue(1);
+        lista.append(7);
+        lista.append(4);
+        lista.sort(null);
+        assertEquals(lista.getAt(1).getItem(),4);
+        assertEquals(lista.getLast().getItem(),7);
+    }
+
+    @Test
+    public void sortReverseFrom_1_7_4Return7_4_1() {
+        lista = new DoubleLinkedListQueue(1);
+        lista.append(7);
+        lista.append(4);
+        lista.sort(Comparator.reverseOrder());
+        assertEquals(lista.getFirst().getItem(),7);
+        assertEquals(lista.getLast().getItem(),1);
+    }
+
+    @Test
+    public void sortNaturalFromEmptyReturnEmpty() {
+        lista = new DoubleLinkedListQueue();
+        lista.sort(Comparator.naturalOrder());
+        assertEquals(lista.size(),0);
     }
 }
