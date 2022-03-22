@@ -142,7 +142,7 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
 
     void sort(Comparator<T> comparator){
         if(this.size != 0){
-            DequeNode<T> tempNode = root, next, finalroot;
+            DequeNode<T> tempNode = root, next, finalroot, finallast = null;
             List<T> asList = new ArrayList<>();
             for (int i = 0; tempNode != null && i < size; i++) {
                 asList.add(tempNode.getItem());
@@ -156,10 +156,13 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
             for(int i = 0; i < size; i++){
                 next = (i + 1 == size) ? null : new DequeNode<>(asList.get(i+1), null, tempNode);
                 tempNode.setNext(next);
+                if(i + 1 == size) finallast = tempNode;
                 tempNode = tempNode.getNext();
+
             }
 
             root = finalroot;
+            last = finallast;
         }
 
     }
