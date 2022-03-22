@@ -141,24 +141,27 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
     }
 
     void sort(Comparator<T> comparator){
-        DequeNode<T> tempNode = root, next, finalroot;
-        List<T> asList = new ArrayList<>();
-        for (int i = 0; tempNode != null && i < size; i++) {
-            asList.add(tempNode.getItem());
-            tempNode = tempNode.getNext();
+        if(this.size != 0){
+            DequeNode<T> tempNode = root, next, finalroot;
+            List<T> asList = new ArrayList<>();
+            for (int i = 0; tempNode != null && i < size; i++) {
+                asList.add(tempNode.getItem());
+                tempNode = tempNode.getNext();
+            }
+            Collections.sort(asList, comparator);
+
+            tempNode = new DequeNode<>(asList.get(0), null, null);
+            finalroot = tempNode;
+
+            for(int i = 0; i < size; i++){
+                next = (i + 1 == size) ? null : new DequeNode<>(asList.get(i+1), null, tempNode);
+                tempNode.setNext(next);
+                tempNode = tempNode.getNext();
+            }
+
+            root = finalroot;
         }
-        Collections.sort(asList, comparator);
 
-        tempNode = new DequeNode<>(asList.get(0), null, null);
-        finalroot = tempNode;
-
-        for(int i = 0; i < size; i++){
-            next = (i + 1 == size) ? null : new DequeNode<>(asList.get(i+1), null, tempNode);
-            tempNode.setNext(next);
-            tempNode = tempNode.getNext();
-        }
-
-        root = finalroot;
     }
 
     public int size() {
@@ -166,7 +169,7 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
     }
 
     public String toString(){
-        String res = "[ ";
+        String res = "Size: " + size + " --> [ ";
         DequeNode<T> temp = root;
 
         while(temp != null){

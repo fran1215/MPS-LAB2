@@ -190,13 +190,13 @@ public class DoubleLinkedListQueueTest {
         lista = new DoubleLinkedListQueue(1);
         lista.append(2);
         lista.append(3);
-        assertEquals(lista.toString(),"[ 1 2 3 ]");
+        assertEquals(lista.toString(),"Size: 3 --> [ 1 2 3 ]");
     }
     @Test
     public void toStringEmpty() {
         lista = new  DoubleLinkedListQueue<>(1);
         lista.deleteLast();
-        assertEquals(lista.toString(),"[ ]");
+        assertEquals(lista.toString(),"Size: 0 --> [ ]");
     }
 
     //Complex operations
@@ -261,7 +261,7 @@ public class DoubleLinkedListQueueTest {
         lista = new DoubleLinkedListQueue(1);
         lista.append(2);
         lista.append(3);
-        DequeNode node = new DequeNode(2,null,null);
+        DequeNode node = new DequeNode(4,null,null);
         assertThrows(RuntimeException.class, () -> lista.delete(node));
     }
     @Test
@@ -278,6 +278,7 @@ public class DoubleLinkedListQueueTest {
         lista.append(2);
         lista.append(3);
         DequeNode node = new DequeNode(2,null,null);
+        lista.delete(node);
         assertEquals(lista.size(),2);
         assertEquals(lista.getAt(1).getItem(),3);
     }
@@ -288,6 +289,7 @@ public class DoubleLinkedListQueueTest {
         lista.append(2);
         lista.append(3);
         DequeNode node = new DequeNode(3,null,null);
+        lista.delete(node);
         assertEquals(lista.size(),2);
         assertEquals(lista.getLast().getItem(),2);
     }
