@@ -13,7 +13,7 @@ public class DoubleLinkedListQueueTest {
     @Test
     public void ConstructorIs4(){
         lista = new DoubleLinkedListQueue(4);
-        assertEquals(lista.root.getItem(), 4);
+        assertEquals(lista.getFirst().getItem(), 4);
     }
     /*
     DequeNode<Integer> next = new DequeNode(3, null,null);
@@ -30,21 +30,21 @@ public class DoubleLinkedListQueueTest {
         lista = new DoubleLinkedListQueue(1);
         lista.append(2);
         lista.append(3);
-        assertEquals(lista.last.getItem(),3);
+        assertEquals(lista.getLast().getItem(),3);
     }
     @Test
     public void Append2From_null_null_Return_2() {
         lista = new DoubleLinkedListQueue<>(1);
         lista.deleteFirst(); //No se puede crear una lista vacia
         lista.append(2);
-        assertEquals(lista.root.getItem(),2);
+        assertEquals(lista.getFirst().getItem(),2);
     }
     @Test
     public void Append3FromEmpty_Return_3() {
         lista = new DoubleLinkedListQueue<>(1);
         lista.deleteFirst();
         lista.append(3);
-        assertEquals(lista.root.getItem(),3);
+        assertEquals(lista.getFirst().getItem(),3);
     }
 
     @Test
@@ -58,14 +58,14 @@ public class DoubleLinkedListQueueTest {
         lista = new DoubleLinkedListQueue(1);
         lista.append(2);
         lista.appendLeft(3);
-        assertEquals(lista.root.getItem(),3);
+        assertEquals(lista.getFirst().getItem(),3);
     }
     @Test
     public void AppendLeft2From_null_null_Return_2() {
         lista = new DoubleLinkedListQueue<>(1);
         lista.deleteFirst(); //No se puede crear una lista vacia
         lista.appendLeft(2);
-        assertEquals(lista.root.getItem(),2);
+        assertEquals(lista.getFirst().getItem(),2);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class DoubleLinkedListQueueTest {
         lista = new DoubleLinkedListQueue<>(1);
         lista.deleteFirst();
         lista.appendLeft(3);
-        assertEquals(lista.root.getItem(),3);
+        assertEquals(lista.getFirst().getItem(),3);
     }
 
     @Test
@@ -88,13 +88,13 @@ public class DoubleLinkedListQueueTest {
         lista.append(2);
         lista.append(3);
         lista.deleteFirst();
-        assertEquals(lista.root.getItem(),2);
+        assertEquals(lista.getFirst().getItem(),2);
     }
     @Test
     public void deleteFisrtFrom_1_Return_vacio() {
         lista = new DoubleLinkedListQueue<>(1);
         lista.deleteFirst();
-        assertEquals(lista.size,0);
+        assertEquals(lista.size(),0);
     }
 
     @Test
@@ -111,13 +111,13 @@ public class DoubleLinkedListQueueTest {
         lista.append(2);
         lista.append(3);
         lista.deleteLast();
-        assertEquals(lista.last.getItem(),2);
+        assertEquals(lista.getLast().getItem(),2);
     }
     @Test
     public void deleteLastFrom_1_Return_vacio() {
         lista = new DoubleLinkedListQueue<>(1);
         lista.deleteLast();
-        assertEquals(lista.size,0);
+        assertEquals(lista.size(),0);
     }
 
     @Test
@@ -133,12 +133,12 @@ public class DoubleLinkedListQueueTest {
         lista = new DoubleLinkedListQueue(1);
         lista.append(2);
         lista.append(3);
-        assertEquals(lista.peekFirst(),lista.root);
+        assertEquals(lista.peekFirst(),lista.getFirst());
     }
     @Test
     public void peakFirstFrom_1_Return_1() {
         lista = new DoubleLinkedListQueue<>(1);
-        assertEquals(lista.peekFirst(),lista.root);
+        assertEquals(lista.peekFirst(),lista.getFirst());
     }
 
     @Test
@@ -154,12 +154,12 @@ public class DoubleLinkedListQueueTest {
         lista = new DoubleLinkedListQueue(1);
         lista.append(2);
         lista.append(3);
-        assertEquals(lista.peekLast(),lista.last);
+        assertEquals(lista.peekLast(),lista.getLast());
     }
     @Test
     public void peakLastFrom_1_Return_1() {
         lista = new DoubleLinkedListQueue<>(1);
-        assertEquals(lista.peekFirst(),lista.last);
+        assertEquals(lista.peekFirst(),lista.getLast());
     }
 
     @Test

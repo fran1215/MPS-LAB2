@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
-    DequeNode<T> root;
-    DequeNode<T> last;
-    int size;
+    private DequeNode<T> root;
+    private DequeNode<T> last;
+    private int size;
 
     public DoubleLinkedListQueue(){
         this.root = this.last = null;
@@ -84,6 +87,14 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
         return last;
     }
 
+    public DequeNode getFirst(){
+        return root;
+    }
+
+    public DequeNode getLast(){
+        return last;
+    }
+
     DequeNode<T> getAt(int position){
         if(size == 0) throw new RuntimeException("Empty queue");
         if(position + 1 > size) throw new RuntimeException("Invalid position");
@@ -113,8 +124,6 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
     void delete(DequeNode<T> node){
         DequeNode<T> temp = find(node);
 
-        if(temp == null) throw new RuntimeException("Element not in queue");
-
         if(temp.getPrevious() == null && temp.getNext() == null){ // Only element in queue
             root = last = null;
         } else if (temp.getPrevious() == null) { // First element in queue
@@ -127,11 +136,25 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
             temp.getPrevious().setNext(temp.getNext());
         }
 
+        size--;
 
     }
 
-    void sort(Comparator<?> comparator){
+    void sort(Comparator<T> comparator){
+        DequeNode<T> tempNode = root;
+        List<T> asList = new ArrayList<>();
+        for (int i = 0; tempNode != null && i < size; i++) {
+            asList.add(tempNode.getItem());
+        }
+        Collections.sort(asList, comparator);
 
+        tempNode = new DequeNode<>(asList.get(0), null, null);
+        for(int i = 1; i < size; i++){
+            tempNode.setNext(getAt(1));
+            tempNode = tempNode.getNext();
+        }
+
+        root = tempNode;
     }
 
     public int size() {
