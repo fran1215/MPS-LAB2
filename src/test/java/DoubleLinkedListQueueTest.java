@@ -296,6 +296,16 @@ public class DoubleLinkedListQueueTest {
         assertEquals(lista.size(),2);
         assertEquals(lista.getLast().getItem(),2);
     }
+    @Test
+    public void delete1From1_2_3_Return2_3() {
+        lista = new  DoubleLinkedListQueue<>(1);
+        lista.append(2);
+        lista.append(3);
+        DequeNode node = new DequeNode(1,null,null);
+        lista.delete(node);
+        assertEquals(lista.size(),2);
+        assertEquals(lista.getFirst().getItem(),2);
+    }
 
     //sort(Comparator<?> comparator)
     @Test

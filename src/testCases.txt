@@ -99,6 +99,7 @@ Test Cases complex operations:
     - [1] && node == 1 -> []
     - [1,2,3] && node == 2 -> [1,3]
     - [1,2,3] && node == 3 -> [1,2]
+    - [1,2,3] && node == 1 -> [2,3]
   sort(Comparator<?> comparator)=
     - [1,7,4] && comparator == null -> [1,4,7]
     - [1,7,4] && comparator == Comparator.naturalOrder() -> [1,4,7]
