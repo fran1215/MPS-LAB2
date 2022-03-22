@@ -105,12 +105,31 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
             temp = temp.getNext();
         }
 
+        if(temp == null) throw new RuntimeException("Item not in queue");
+
         return temp;
     }
 
     void delete(DequeNode<T> node){
+        DequeNode<T> temp = find(node);
+
+        if(temp == null) throw new RuntimeException("Element not in queue");
+
+        if(temp.getPrevious() == null && temp.getNext() == null){ // Only element in queue
+            root = last = null;
+        } else if (temp.getPrevious() == null) { // First element in queue
+            root = temp.getNext();
+            root.setPrevious(null);
+        } else if (temp.getNext() == null) { // Last element in queue
+            last = temp.getPrevious();
+            last.setNext(null);
+        } else {
+            temp.getPrevious().setNext(temp.getNext());
+        }
+
 
     }
+
     void sort(Comparator<?> comparator){
 
     }
