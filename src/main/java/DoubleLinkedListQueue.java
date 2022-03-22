@@ -3,6 +3,11 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
     DequeNode<T> last;
     int size;
 
+    public DoubleLinkedListQueue(){
+        this.root = this.last = null;
+        size = 0;
+    }
+
     public DoubleLinkedListQueue(T root){
         if(root == null) throw new RuntimeException("Root is Null");
         DequeNode<T> nodo = new DequeNode(root, null, null);
