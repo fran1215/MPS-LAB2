@@ -85,7 +85,8 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
     }
 
     DequeNode<T> getAt(int position){
-        if(size == 0 || position + 1 > size) throw new RuntimeException("Invalid position");
+        if(size == 0) throw new RuntimeException("Empty queue");
+        if(position + 1 > size) throw new RuntimeException("Invalid position");
 
         DequeNode<T> temp = root;
         for(int i = 0; i<position; i++){
@@ -95,8 +96,16 @@ public class DoubleLinkedListQueue<T> implements DoubleEndedQueue<T>{
         return temp;
     }
 
-    DequeNode<T> find (T item){
-        return null;
+    DequeNode<T> find (DequeNode<T> item){
+        if(size == 0) throw new RuntimeException("Empty queue");
+        if(item == null) throw new RuntimeException("Item can't be null");
+
+        DequeNode<T> temp = root;
+        while(temp!=null && !temp.getItem().equals(item.getItem())){
+            temp = temp.getNext();
+        }
+
+        return temp;
     }
 
     void delete(DequeNode<T> node){
