@@ -198,4 +198,97 @@ public class DoubleLinkedListQueueTest {
         lista.deleteLast();
         assertEquals(lista.toString(),"[ ]");
     }
+
+    //Complex operations
+    //getAt
+    @Test
+    public void getAt2From_1_2_3_Return_3() {
+        lista = new DoubleLinkedListQueue(1);
+        lista.append(2);
+        lista.append(3);
+        assertEquals(lista.getAt(2).getItem(),3);
+    }
+    @Test
+    public void getAt4From_1_2_3ThrowException() {
+        lista = new DoubleLinkedListQueue(1);
+        lista.append(2);
+        lista.append(3);
+        assertThrows(RuntimeException.class, () -> lista.getAt(4));
+    }
+
+    @Test
+    public void getAt2FromEmptyThrowException() {
+        lista = new  DoubleLinkedListQueue<>();
+        assertThrows(RuntimeException.class, () -> lista.getAt(2));
+    }
+
+    //find
+    @Test
+    public void find2From_1_2_3_Return_2() {
+        lista = new DoubleLinkedListQueue(1);
+        lista.append(2);
+        lista.append(3);
+        DequeNode node = new DequeNode(2,null,null);
+        assertEquals(lista.find(node).getItem(),2);
+    }
+    @Test
+    public void find4From_1_2_3ThrowException() {
+        lista = new DoubleLinkedListQueue(1);
+        lista.append(2);
+        lista.append(3);
+        DequeNode node = new DequeNode(4,null,null);
+        assertThrows(RuntimeException.class, () -> lista.find(node));
+    }
+
+    @Test
+    public void find2FromEmptyThrowException() {
+        lista = new  DoubleLinkedListQueue<>();
+        DequeNode node = new DequeNode(2,null,null);
+        assertThrows(RuntimeException.class, () -> lista.find(node));
+    }
+
+    @Test
+    public void findNullFrom1_2_3ThrowException() {
+        lista = new DoubleLinkedListQueue(1);
+        lista.append(2);
+        lista.append(3);
+        assertThrows(RuntimeException.class, () -> lista.find(null));
+    }
+
+    //delete
+    @Test
+    public void delete4From_1_2_3ThrowException() {
+        lista = new DoubleLinkedListQueue(1);
+        lista.append(2);
+        lista.append(3);
+        DequeNode node = new DequeNode(2,null,null);
+        assertThrows(RuntimeException.class, () -> lista.delete(node));
+    }
+    @Test
+    public void delete1From_1ReturnEmpty() {
+        lista = new DoubleLinkedListQueue(1);
+        DequeNode node = new DequeNode(1,null,null);
+        lista.delete(node);
+        assertEquals(lista.size(),0);
+    }
+
+    @Test
+    public void delete2From1_2_3_Return1_3() {
+        lista = new  DoubleLinkedListQueue<>(1);
+        lista.append(2);
+        lista.append(3);
+        DequeNode node = new DequeNode(2,null,null);
+        assertEquals(lista.size(),2);
+        assertEquals(lista.getAt(1).getItem(),3);
+    }
+
+    @Test
+    public void delete3From1_2_3_Return1_2() {
+        lista = new  DoubleLinkedListQueue<>(1);
+        lista.append(2);
+        lista.append(3);
+        DequeNode node = new DequeNode(3,null,null);
+        assertEquals(lista.size(),2);
+        assertEquals(lista.getLast().getItem(),2);
+    }
 }
